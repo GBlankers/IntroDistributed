@@ -12,7 +12,4 @@ public class Main {
         System.out.println("test");
     }
 
-    public static void hello(){
-        System.out.println("Hello");
-    }
 }
