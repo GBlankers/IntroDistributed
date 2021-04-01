@@ -9,6 +9,6 @@ public class Main {
     }
 
     public void test(){
-        System.out.println("test3");
+        System.out.println("test2");
     }
 }
