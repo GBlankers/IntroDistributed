@@ -2,7 +2,6 @@ import java.io.*;
 import java.net.*;
 
 public class ServerUdp {
-    private static int serverPort = 5000;
 
     public static void main(String[] args) throws IOException {
         DatagramSocket socket = new DatagramSocket(4900);

@@ -3,19 +3,25 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ServerTCP {
-    private static int serverPort = 5000;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException{
+        int serverPort = 5000;
         ServerSocket serverSocket = new ServerSocket(serverPort);
 
         int counter = 0;
         System.out.println("ServerTCP Started ....");
 
         while(true){
-            counter ++;
-            Socket socket = serverSocket.accept();
-            System.out.println("Input nr: "+ counter + " accepted");
-            new ServerClientThread(socket,counter).start();
+            try {
+                counter ++;
+                Socket socket = serverSocket.accept();
+                System.out.println("Input nr: "+ counter + " accepted");
+                new ServerClientThread(socket,counter).start();
+            } catch (IOException e){
+                System.out.println("IO exception");
+                break;
+            }
+
         }
     }
 
@@ -34,9 +40,9 @@ public class ServerTCP {
             try {
                 byte[] fileBytes = new byte[(int) file.length()];
                 BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(file));
-                bufferedInputStream.read(fileBytes, 0, fileBytes.length);
+                int bytesRead = bufferedInputStream.read(fileBytes, 0, fileBytes.length);
                 OutputStream os = serverClient.getOutputStream();
-                os.write(fileBytes, 0, fileBytes.length);
+                os.write(fileBytes, 0, bytesRead);
                 os.flush();
                 bufferedInputStream.close();
                 os.close();

@@ -11,12 +11,12 @@ public class ClientTCP {
     public static void main(String[] args){
         try {
             Socket sock = new Socket("127.0.0.1", 5000);
-            byte[] mybytearray = new byte[1024];
+            byte[] bytearray = new byte[1024];
             InputStream is = sock.getInputStream();
             FileOutputStream fos = new FileOutputStream(fileOutput);
             BufferedOutputStream bos = new BufferedOutputStream(fos);
-            int bytesRead = is.read(mybytearray, 0, mybytearray.length);
-            bos.write(mybytearray, 0, bytesRead);
+            int bytesRead = is.read(bytearray, 0, bytearray.length);
+            bos.write(bytearray, 0, bytesRead);
             bos.close();
             sock.close();
         } catch (UnknownHostException ukh){
